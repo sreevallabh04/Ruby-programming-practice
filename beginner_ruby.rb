@@ -1,8 +1,8 @@
-puts "Hello!"
-#take input of two numbers and print the sum
-puts "Enter first number:"
-first_number = gets.chomp.to_i
-puts "Enter second number:"
-second_number = gets.chomp.to_i
-sum = first_number + second_number
-puts "The sum of #{first_number} and #{second_number} is #{sum}."
+puts "Hello world"
+name = "Sreevallabh"
+puts "Welcome is #{name}, How are you"
+age = 20
+puts "I am #{age} years old."
+p "The age an be incremented #{age + 1} years old."
+x,y=5,8
+p "sum of x and y is #{x+y}"
