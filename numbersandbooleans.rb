@@ -51,4 +51,5 @@
 #get a number from the user and check whtere it is odd or even number. print even if it s even and print odd if it is odd, without if or ternary
 puts "Enter a number"
 number=gets.chomp.to_i
-number.even? ? (p "Even") : (p "Odd")
+var.odd? && (puts "odd")
+var.even? && (puts "even")
