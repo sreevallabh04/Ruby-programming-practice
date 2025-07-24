@@ -1,6 +1,4 @@
-# Simple Login System
 
-# Default credentials
 username = "admin"
 password = "123"
 
@@ -30,3 +28,4 @@ while attempts < 3
     puts "QUIT! BYE BYE!"
   end
 end
+
