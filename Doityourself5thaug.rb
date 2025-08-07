@@ -2,20 +2,30 @@
 #If the original array has an even number of elements, ensure that the 2 new arrays have an equal number of elements. 
 #If the original array has an odd number of elements, ensure that the first new array has the greater number of elements.
 
-def split_in_two(array)
-  if array.length % 2 == 0
-    return array.first(array.length / 2), array.last(array.length / 2)
-  else
-    return array.first(array.length / 2), array.last(array.length / 2 + 1)
-  end
+# def split_in_two(array)
+#   if array.length % 2 == 0
+#     return array.first(array.length / 2), array.last(array.length / 2)
+#   else
+#     return array.first(array.length / 2), array.last(array.length / 2 + 1)
+#   end
+# end
+
+# puts "Enter array elements separated by spaces:"
+# input = gets.chomp
+# arr = input.split.map(&:to_i)
+
+# first_half, second_half = split_in_two(arr)
+
+# puts " #{first_half}"
+# puts " #{second_half}"
+
+
+
+def split_in_two(values)
+  number_of_elements = values.length
+  midpoint = (number_of_elements + 1) / 2  
+  [values.first(midpoint), values.drop(midpoint)]
 end
+p split_in_two([1,2,3,4,5,6,7,8,9])
+p split_in_two([1,2,3,4,5,6,7,8])
 
-# Get input from user
-puts "Enter array elements separated by spaces:"
-input = gets.chomp
-arr = input.split.map(&:to_i)
-
-first_half, second_half = split_in_two(arr)
-
-puts " #{first_half}"
-puts " #{second_half}"
