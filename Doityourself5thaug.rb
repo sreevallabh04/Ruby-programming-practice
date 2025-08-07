@@ -3,12 +3,19 @@
 #If the original array has an odd number of elements, ensure that the first new array has the greater number of elements.
 
 def split_in_two(array)
-  if array.length%2==0
-    return array.first(array.length/2),array.last(array.length/2)
+  if array.length % 2 == 0
+    return array.first(array.length / 2), array.last(array.length / 2)
   else
-    return array.first(array.length/2),array.last(array.length/2+1)
+    return array.first(array.length / 2), array.last(array.length / 2 + 1)
   end
 end
-arr=[1,2,3,4,5,6,7,8,9,10]
-p split_in_two(arr)
 
+# Get input from user
+puts "Enter array elements separated by spaces:"
+input = gets.chomp
+arr = input.split.map(&:to_i)
+
+first_half, second_half = split_in_two(arr)
+
+puts " #{first_half}"
+puts " #{second_half}"
