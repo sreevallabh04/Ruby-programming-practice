@@ -16,7 +16,7 @@ def read_elements(array)
   return positive_array, negative_array
 end
 
-puts "Enter numbers separated by spaces:"
+puts "Enter the array "
 input = gets.chomp
 test_array = input.split.map(&:to_i)
 
