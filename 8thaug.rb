@@ -28,3 +28,16 @@ shirts.each do |shirt|
     puts "I love wearing a #{shirt} shirt with a #{tie} tie"
   end
 end
+
+#each within index
+
+colors =["red", "blue", "green", "yellow"]
+colors.each_with_index do |i,j|
+  puts "I love wearing a #{i} shirt with a #{j} tie"
+end
+
+#So tell me how is the idea alright?
+#Usually large companies have supply chain from starting to end
+#right from raw materials to last minute delivery
+#the intermediate steps are so many and it differs from company to company
+#What I was thinking is a project to identify where companies
