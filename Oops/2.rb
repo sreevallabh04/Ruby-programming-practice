@@ -17,14 +17,14 @@ laptop=Gadget.new
 puts phone.info
 puts laptop.info
 
-# phone=Gadget.new
+phone=Gadget.new
 
-# p phone
+p phone
 
-# laptop=Gadget.new
-# p laptop
+laptop=Gadget.new
+p laptop
 
-# p phone.instance_variables
+p phone.instance_variables
 
 
 #instance methods
