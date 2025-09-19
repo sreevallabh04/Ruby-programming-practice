@@ -1,0 +1,6 @@
+[2025-09-08 09:12:34] [module:auth] INFO User login succeeded
+[2025-09-08 09:13:01] [module:auth] ERROR Invalid credentials for user bob
+[2025-09-08 09:14:12] [module:store] WARN Low stock for product 123
+[2025-09-08 09:15:45] [module:profile] INFO Profile updated
+[2025-09-08 09:16:10] [module:store] ERROR Database timeout
+[2025-09-08 09:17:55] [module:download] INFO File downloaded

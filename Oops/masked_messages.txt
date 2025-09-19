@@ -1,0 +1,6 @@
+Hi Alice (***EMAIL***), please review the document.
+Contact support at ***EMAIL*** for assistance.
+Bob's email is ***EMAIL*** and he is on leave.
+No emails here, just a normal line.
+Forward to ***EMAIL*** for follow-up.
+

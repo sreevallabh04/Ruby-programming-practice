@@ -1,0 +1,9 @@
+Total lines: 6
+ERROR lines: 2
+WARN lines: 1
+
+Modules found:
+auth
+store
+profile
+download
