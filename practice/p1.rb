@@ -5,7 +5,6 @@
 # • balance should be read-only (cannot be directly changed).
 
 class BankAccount
-  # owner should be read/write; balance should be read-only
   attr_accessor :owner
   attr_reader :balance
 
@@ -56,7 +55,6 @@ class BankAccount
   end
 end
 
-# --- Sample usage (for testing) ---
 acc1 = BankAccount.new("Alice", 1000)
 acc2 = BankAccount.new("Bob", 200)
 acc1.deposit(500)

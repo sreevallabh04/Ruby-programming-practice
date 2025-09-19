@@ -71,13 +71,13 @@ class Student
 end
 
 # --- Sample usage (for testing) ---
-# stu = Student.new("Charlie")
-# stu.add_mark("Math", 95)
-# stu.add_mark("Science", 82)
-# stu.update_mark("Science", 88)
-# stu.remove_mark("History") # prints "Subject not found"
-# puts stu.average  # => 91.5
-# puts stu.grade    # => A
-# puts stu          # => Charlie: Avg=91.50, Grade=A
+stu = Student.new("Charlie")
+stu.add_mark("Math", 95)
+stu.add_mark("Science", 82)
+stu.update_mark("Science", 88)
+stu.remove_mark("History") # prints "Subject not found"
+puts stu.average  # => 91.5
+puts stu.grade    # => A
+puts stu          # => Charlie: Avg=91.50, Grade=A
 
 
