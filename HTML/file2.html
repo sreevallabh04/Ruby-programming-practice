@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Ruby: A Beginner's Guide</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0 auto; max-width: 800px; padding: 20px; background-color: #f4f4f4; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        h1 { text-align: center; margin-bottom: 40px; }
+        h2 { border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 40px; }
+        h3 { color: #3498db; margin-top: 30px; }
+        pre { background-color: #ecf0f1; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9em; border: 1px solid #bdc3c7; }
+        code { font-family: 'Consolas', 'Monaco', monospace; color: #c0392b; }
+        pre code { color: #2c3e50; }
+        p { margin-bottom: 15px; }
+        ul { list-style-type: disc; margin-left: 20px; margin-bottom: 15px; }
+        li { margin-bottom: 5px; }
+        strong { color: #e74c3c; }
+        .comment { color: #7f8c8d; font-style: italic; }
+        .highlight { background-color: #fffacd; padding: 2px 4px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to Ruby! Your Coding Adventure Starts Here!</h1>
+    <p>Hello, future Ruby wizard! Are you ready to dive into the wonderful world of programming? Ruby is a super fun and friendly language, and we're going to learn some really cool things together. Don't worry if you're brand new; we'll take it one small step at a time. By the end, you'll be amazed at what you can do!</p>
+
+    <h2>1. Classes, Objects, and Methods: Building Blocks of Ruby</h2>
+    <p>Imagine you want to build lots of toy cars. Instead of drawing each one from scratch, you could make a "blueprint" for a car. In Ruby, a <strong>Class</strong> is like that blueprint! It tells us what kind of things our "car" will have (like color and number of wheels) and what it can do (like drive or honk).</p>
+    <p>When you actually build a toy car from your blueprint, that toy car is an <strong>Object</strong>. It's a real, tangible thing made from the class blueprint. You can have many objects (many cars) from one class (one car blueprint).</p>
+    <p>And what about those things your car can do, like "drive" or "honk"? Those are called <strong>Methods</strong>! They are actions that objects can perform.</p>
+
+    <h3>Let's see it in action!</h3>
+    <pre><code class="language-ruby">
+# 1. Define our blueprint (Class) for a "Car"
+class Car
+  # This is a special method called "initialize"
+  # It runs automatically when we create a new Car object
+  def initialize(color, model)
+    @color = color  # @color means this car's specific color
+    @model = model  # @model means this car's specific model
+  end
+
+  # This is a method! It describes an action our Car can do.
+  def drive
+    "The #{@color} #{@model} is driving away! Vroom vroom!"
+  end
+
+  # Another method!
+  def honk
+    "Beep! Beep! Says the #{@model}."
+  end
+end
+
+# 2. Create actual toy cars (Objects) from our blueprint
+my_car = Car.new("red", "Sedan")
+friends_car = Car.new("blue", "Hatchback")
+
+# 3. Make our cars do things (call Methods)
+puts my_car.drive
+puts friends_car.honk
+puts my_car.honk
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>First, we used the keyword <code class="highlight">class Car</code> to create our blueprint named <code class="highlight">Car</code>. Everything inside <code class="highlight">end</code> is part of this blueprint.</li>
+        <li>The <code class="highlight">def initialize(color, model)</code> method is super important! It's like the assembly line for our toy cars. When we say <code class="highlight">Car.new(...)</code>, this method is called. It takes in information (like "red" and "Sedan") and stores it for that specific car using <code class="highlight">@color</code> and <code class="highlight">@model</code>. The <code class="highlight">@</code> symbol means it's an "instance variable" – data unique to each object.</li>
+        <li>Then, we defined two more methods: <code class="highlight">drive</code> and <code class="highlight">honk</code>. These methods contain instructions for what our cars can do. They use the <code class="highlight">@color</code> and <code class="highlight">@model</code> data that was set during initialization!</li>
+        <li>Next, we created two <strong>objects</strong>: <code class="highlight">my_car</code> and <code class="highlight">friends_car</code>. We used <code class="highlight">Car.new("red", "Sedan")</code> to build our red Sedan, and so on. Each of these is a unique car!</li>
+        <li>Finally, we made our cars perform actions! <code class="highlight">my_car.drive</code> tells <code class="highlight">my_car</code> to perform its <code class="highlight">drive</code> method. <code class="highlight">puts</code> is a Ruby command to print things to your screen.</li>
+    </ul>
+
+    <h2>2. Blocks, Procs, and Lambdas: Tiny Workers for Your Code</h2>
+    <p>Imagine you have a magic spell that you want to use over and over again, but sometimes you want to change a tiny part of the spell. In Ruby, <strong>Blocks</strong>, <strong>Procs</strong>, and <strong>Lambdas</strong> are like these tiny, flexible pieces of code that you can pass around and use whenever you need them!</p>
+
+    <h3>Blocks: The Everyday Helper</h3>
+    <p>Blocks are the most common! You've probably seen them without even knowing. They're usually tied to a method call, like when you iterate through a list of items.</p>
+    <pre><code class="language-ruby">
+# Using a block with the "each" method
+[1, 2, 3].each do |number|
+  puts "The number is #{number}."
+end
+
+# You can also write blocks with curly braces for shorter ones
+["apple", "banana"].map { |fruit| fruit.upcase } # This creates a new array: ["APPLE", "BANANA"]
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>The <code class="highlight">[1, 2, 3].each do |number| ... end</code> part shows a block. The code between <code class="highlight">do</code> and <code class="highlight">end</code> is the block.</li>
+        <li>For each number in the list <code class="highlight">[1, 2, 3]</code>, the block runs, and the current number is given to the <code class="highlight">|number|</code> variable.</li>
+        <li>The <code class="highlight">map { |fruit| fruit.upcase }</code> is another block, written with curly braces. It takes each <code class="highlight">fruit</code> and makes it uppercase.</li>
+    </ul>
+
+    <h3>Procs: Blocks That Can Be Saved!</h3>
+    <p>A <strong>Proc</strong> (short for "procedure") is like a block that you've put into a little box and labeled. You can save this box, give it to other parts of your program, and run the code inside whenever you want!</p>
+    <pre><code class="language-ruby">
+# Create a Proc
+my_greeting = Proc.new do |name|
+  puts "Hello, #{name}! Nice to meet you."
+end
+
+# Call the Proc
+my_greeting.call("Alice")
+my_greeting.call("Bob")
+
+# Pass a Proc to a method
+def execute_proc(a_proc_object)
+  a_proc_object.call("World")
+end
+
+execute_proc(my_greeting)
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>We create a Proc using <code class="highlight">Proc.new do ... end</code> and store it in the <code class="highlight">my_greeting</code> variable.</li>
+        <li>Now, <code class="highlight">my_greeting</code> holds our greeting code! We can run it using <code class="highlight">my_greeting.call("Alice")</code>.</li>
+        <li>We even created a method <code class="highlight">execute_proc</code> that takes a Proc as an argument and calls it. This shows how you can pass Procs around like any other piece of data.</li>
+    </ul>
+
+    <h3>Lambdas: Strict and Picky Procs</h3>
+    <p><strong>Lambdas</strong> are very similar to Procs, but they are a bit stricter, especially about how many "ingredients" (arguments) you give them, and how they <code class="highlight">return</code> values.</p>
+    <pre><code class="language-ruby">
+# Create a Lambda
+my_lambda = ->(name) { puts "Greetings, #{name}!" }
+
+# Call the Lambda
+my_lambda.call("Charlie")
+
+# Lambda arguments: This will raise an error because it expects one argument!
+# my_lambda.call # Uncommenting this line would cause an error!
+
+# Proc vs Lambda return behavior
+def test_return_proc
+  my_proc = Proc.new { return "Return from Proc!" }
+  my_proc.call
+  "This line will not be reached if proc is called"
+end
+
+def test_return_lambda
+  my_lambda = -> { return "Return from Lambda!" }
+  result = my_lambda.call
+  "This line IS reached after lambda call: #{result}"
+end
+
+puts test_return_proc
+puts test_return_lambda
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>We created a Lambda using the <code class="highlight">->(name) { ... }</code> syntax. It looks a bit different but works similarly to a Proc.</li>
+        <li>Lambdas are picky about arguments! If <code class="highlight">my_lambda</code> expects one argument (like <code class="highlight">name</code>), and you call it without one, it will complain (raise an error). Procs are more forgiving.</li>
+        <li>The <code class="highlight">return</code> difference is important:
+            <ul>
+                <li>When a <strong>Proc</strong> uses <code class="highlight">return</code>, it tries to exit not just the Proc itself, but the method that called the Proc! (Like <code class="highlight">test_return_proc</code>).</li>
+                <li>When a <strong>Lambda</strong> uses <code class="highlight">return</code>, it only exits the Lambda, and control returns to the method that called it. (Like <code class="highlight">test_return_lambda</code>).</li>
+            </ul>
+        </li>
+    </ul>
+    <p><strong>When to use them?</strong></p>
+    <ul>
+        <li><strong>Blocks:</strong> For simple, quick actions tied to a method, like iterating or transforming lists.</li>
+        <li><strong>Procs:</strong> When you need to save a block of code and pass it around as an object, and you don't mind a bit of flexibility with arguments or the <code class="highlight">return</code> behavior.</li>
+        <li><strong>Lambdas:</strong> When you need stricter control over arguments and local returns, acting more like regular methods. They are often preferred for more complex callbacks or situations where precision is key.</li>
+    </ul>
+
+    <h2>3. Namespaces and Mixins: Organizing and Sharing Superpowers</h2>
+    <p>Imagine you have a big toy box, and you want to keep your toy cars separate from your toy animals so it's not a mess. In Ruby, <strong>Modules</strong> help us do just that! They act as a "container" for related things, helping us organize our code and avoid naming conflicts. This is called creating <strong>Namespaces</strong>.</p>
+    <p>Modules also have another superpower: they let us share abilities between different classes without them being directly related. This is called <strong>Mixins</strong>.</p>
+
+    <h3>Namespaces with Modules: Keeping Things Tidy</h3>
+    <pre><code class="language-ruby">
+# Module for our "Vehicle" related classes
+module Vehicle
+  class Car
+    def initialize(model)
+      @model = model
+    end
+
+    def description
+      "A vehicle car model: #{@model}"
+    end
+  end
+
+  class Truck
+    def description
+      "A big truck!"
+    end
+  end
+end
+
+# Imagine another part of our program also has a "Car"
+class Car
+  def description
+    "A simple car, not a vehicle car."
+  end
+end
+
+# Now let's see which "Car" we get!
+puts Vehicle::Car.new("SUV").description # This is the Car from our Vehicle module
+puts Car.new.description             # This is the "global" Car class
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>We defined a <code class="highlight">module Vehicle</code>. Inside it, we put our <code class="highlight">Car</code> and <code class="highlight">Truck</code> classes.</li>
+        <li>Notice we also have a <code class="highlight">class Car</code> outside the module. This shows a potential naming conflict if we didn't use modules!</li>
+        <li>To use the <code class="highlight">Car</code> from our <code class="highlight">Vehicle</code> module, we use <code class="highlight">Vehicle::Car</code>. The <code class="highlight">::</code> is like saying "look inside the Vehicle box for Car". This is how modules provide namespaces and keep names organized.</li>
+    </ul>
+
+    <h3>Mixins: Sharing Superpowers with `include` and `extend`</h3>
+    <p>With mixins, we can define a set of methods in a module and then "mix" them into classes. It's like giving classes instant superpowers!</p>
+    <pre><code class="language-ruby">
+# Our superpower module: "Walkable"
+module Walkable
+  def walk
+    "I am walking!"
+  end
+
+  def run
+    "I am running fast!"
+  end
+end
+
+# Our Human class gets walking superpowers
+class Human
+  include Walkable # Now Human objects can walk and run!
+
+  def talk
+    "Hello!"
+  end
+end
+
+# Our Robot class also gets walking superpowers
+class Robot
+  include Walkable # Now Robot objects can walk and run too!
+
+  def operate
+    "Operating system online."
+  end
+end
+
+# Let's test their new powers!
+alice = Human.new
+walle = Robot.new
+
+puts alice.walk
+puts walle.run
+
+# What if we want the CLASS itself to have a superpower? Use "extend"!
+module GreetableClass
+  def greet_everyone
+    "Hello to all from #{self.name}!"
+  end
+end
+
+class Party
+  extend GreetableClass # Party class itself gets the superpower
+end
+
+puts Party.greet_everyone # We call it directly on the Class, not an object
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>We created a <code class="highlight">module Walkable</code> with <code class="highlight">walk</code> and <code class="highlight">run</code> methods.</li>
+        <li>By using <code class="highlight">include Walkable</code> inside the <code class="highlight">Human</code> class, we "mixed in" all the methods from <code class="highlight">Walkable</code> into <code class="highlight">Human</code>. Now, any <code class="highlight">Human</code> object (like <code class="highlight">alice</code>) can use <code class="highlight">walk</code> and <code class="highlight">run</code>!</li>
+        <li>We did the same for the <code class="highlight">Robot</code> class, showing how different classes can share methods from the same module.</li>
+        <li>The <code class="highlight">extend GreetableClass</code> example shows a different kind of superpower. When you use <code class="highlight">extend</code>, the methods from the module become available directly on the <strong class="highlight">class itself</strong>, not on the objects made from that class. So, <code class="highlight">Party.greet_everyone</code> works, but <code class="highlight">Party.new.greet_everyone</code> would not.</li>
+    </ul>
+
+    <h2>4. Reflection and Metaprogramming: Ruby's Magic Mirrors and Shape-shifting</h2>
+    <p>Ruby is like a language with a built-in magic mirror! <strong>Reflection</strong> means that a program can "look at itself" and understand its own structure and behavior while it's running. It can ask questions like "What methods do I have?" or "What's my name?"</p>
+    <p>Building on reflection, <strong>Metaprogramming</strong> is like giving our program the ability to "change itself" or "write new code" on the fly! It's super powerful, but like any magic, it should be used wisely.</p>
+
+    <h3>Reflection: Looking in the Mirror</h3>
+    <pre><code class="language-ruby">
+class Wizard
+  attr_accessor :name # Creates methods to get and set 'name'
+
+  def initialize(name)
+    @name = name
+  end
+
+  def cast_spell(spell_name)
+    "#{name} casts #{spell_name}!"
+  end
+
+  private # Private methods cannot be called directly from outside
+  def secret_knowledge
+    "I know the secret!"
+  end
+end
+
+merlin = Wizard.new("Merlin")
+
+# What methods does merlin have?
+puts "Merlin's methods: #{merlin.methods.sort.take(5).join(', ')}..." # Too many, so we take a few
+
+# Does merlin respond to a certain method?
+puts "Does Merlin have 'cast_spell'?: #{merlin.respond_to?(:cast_spell)}"
+puts "Does Merlin have 'secret_knowledge'?: #{merlin.respond_to?(:secret_knowledge)}" # Private methods too!
+
+# Calling a method by its name (like a string)!
+puts merlin.send(:cast_spell, "Fireball") # Calling cast_spell with "Fireball"
+
+# You can even send a private method, but it's usually not recommended
+puts merlin.send(:secret_knowledge)
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>We created a <code class="highlight">Wizard</code> class.</li>
+        <li><code class="highlight">merlin.methods</code> gives us a huge list of all the methods that <code class="highlight">merlin</code> object can use! We sort and take just a few to show.</li>
+        <li><code class="highlight">respond_to?(:method_name)</code> asks "Does this object know how to do this action?". It's a great way to check before you try to use a method.</li>
+        <li>The <code class="highlight">send</code> method is where the magic really starts! It lets you call a method on an object by providing the method's name as a symbol (like <code class="highlight">:cast_spell</code>) or a string. This is powerful because you can decide which method to call dynamically, perhaps based on user input!</li>
+        <li>Even private methods can be called with <code class="highlight">send</code>, though it generally breaks the idea of them being private, so use with caution!</li>
+    </ul>
+
+    <h3>Metaprogramming: Changing Code as It Runs</h3>
+    <p>Metaprogramming is about writing code that writes code. It allows you to define new methods or even new classes during the program's execution!</p>
+    <pre><code class="language-ruby">
+class MagicBox
+  # Use define_method to create new methods on the fly!
+  # This method defines getter and setter methods for an attribute
+  def self.add_magical_attribute(attribute_name)
+    # Define a method to get the value
+    define_method(attribute_name) do
+      instance_variable_get("@#{attribute_name}")
+    end
+
+    # Define a method to set the value
+    define_method("#{attribute_name}=") do |value|
+      instance_variable_set("@#{attribute_name}", value)
+    end
+  end
+
+  # Let's add some magical attributes!
+  add_magical_attribute :color
+  add_magical_attribute :size
+end
+
+my_magic_box = MagicBox.new
+my_magic_box.color = "rainbow" # We can use the 'color=' method we just created!
+my_magic_box.size = "small"
+
+puts "My magic box is #{my_magic_box.color} and #{my_magic_box.size}."
+
+# Check if the methods were actually defined
+puts "Does my_magic_box respond to 'color'?: #{my_magic_box.respond_to?(:color)}"
+puts "Does my_magic_box respond to 'size='?: #{my_magic_box.respond_to?(:size=)}"
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>In our <code class="highlight">MagicBox</code> class, we defined a special class method <code class="highlight">self.add_magical_attribute</code>. The <code class="highlight">self.</code> means this method belongs to the <code class="highlight">MagicBox</code> class itself, not to its objects.</li>
+        <li>Inside this method, we use <code class="highlight">define_method</code>. This is the core of metaprogramming here! It lets us create brand new methods (like <code class="highlight">color</code> and <code class="highlight">color=</code>) dynamically.</li>
+        <li><code class="highlight">instance_variable_get</code> and <code class="highlight">instance_variable_set</code> are reflection methods that allow us to directly interact with an object's instance variables (like <code class="highlight">@color</code>).</li>
+        <li>When we say <code class="highlight">add_magical_attribute :color</code>, Ruby actually writes the <code class="highlight">color</code> and <code class="highlight">color=</code> methods for us on the fly!</li>
+        <li>This makes our code much more flexible and less repetitive!</li>
+    </ul>
+    <p><strong>A word of caution!</strong> Metaprogramming is powerful, but it can sometimes make code harder to read and understand if overused. It's best used when you have a clear need for dynamic behavior, like building frameworks or libraries.</p>
+
+    <h2>5. Files and Directories: Storing and Finding Your Treasures</h2>
+    <p>Imagine your computer is a big library. <strong>Files</strong> are like books where you can write down information (like your stories or scores for a game), and <strong>Directories</strong> (also called folders) are like shelves or sections that help you organize those books.</p>
+    <p>Ruby makes it super easy to read from files, write to files, and explore your computer's "library"!</p>
+
+    <h3>Opening, Writing, and Reading Files Safely</h3>
+    <pre><code class="language-ruby">
+# 1. Writing to a file
+File.open("my_story.txt", "w") do |file|
+  file.puts "Once upon a time, in a land far, far away,"
+  file.puts "a brave Ruby programmer wrote amazing code!"
+  file.puts "The End."
+end
+puts "Story written to my_story.txt!"
+
+# 2. Reading from a file
+# The 'r' means read mode
+File.open("my_story.txt", "r") do |file|
+  puts "\nReading the story:"
+  file.each_line do |line|
+    puts "  #{line.chomp}" # .chomp removes the extra newline at the end
+  end
+end
+
+# 3. Appending to a file (adding more to the end)
+# The 'a' means append mode
+File.open("my_story.txt", "a") do |file|
+  file.puts "But wait! There's more!"
+  file.puts "A sequel is coming soon..."
+end
+puts "\nMore added to my_story.txt!"
+
+# 4. Reading the whole file at once
+puts "\nReading the updated story all at once:"
+content = File.read("my_story.txt")
+puts content
+
+# 5. Deleting a file (use with caution!)
+# File.delete("my_story.txt")
+# puts "\nmy_story.txt deleted!"
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li>We use <code class="highlight">File.open("filename.txt", "mode") do |file| ... end</code> to work with files. This pattern is very safe because Ruby automatically closes the file for you when the block finishes, even if errors happen!</li>
+        <li>The "mode" is important:
+            <ul>
+                <li><code class="highlight">"w"</code> means <strong>write</strong> mode. If the file doesn't exist, Ruby creates it. If it *does* exist, Ruby clears everything inside it before writing!</li>
+                <li><code class="highlight">"r"</code> means <strong>read</strong> mode. You can only read from the file. If it doesn't exist, Ruby will give you an error.</li>
+                <li><code class="highlight">"a"</code> means <strong>append</strong> mode. Ruby will add new content to the *end* of the file without deleting existing content. If the file doesn't exist, Ruby creates it.</li>
+            </ul>
+        </li>
+        <li>Inside the <code class="highlight">"w"</code> block, <code class="highlight">file.puts</code> writes lines into the file.</li>
+        <li>Inside the <code class="highlight">"r"</code> block, <code class="highlight">file.each_line</code> reads the file line by line. <code class="highlight">.chomp</code> is used to remove the extra newline character that <code class="highlight">puts</code> adds and that <code class="highlight">each_line</code> leaves in.</li>
+        <li><code class="highlight">File.read("filename.txt")</code> is a shortcut to read the entire file content into a single string.</li>
+        <li><code class="highlight">File.delete("filename.txt")</code> will remove the file permanently. Be very careful with this!</li>
+    </ul>
+
+    <h3>Standard Input/Output Objects: Talking to Your Computer</h3>
+    <p>Your Ruby program can also talk to you and listen to what you type!</p>
+    <ul>
+        <li><code class="highlight">STDIN</code> is like the microphone for your program (Standard INput, usually your keyboard).</li>
+        <li><code class="highlight">STDOUT</code> is like the speaker for your program (Standard OUTput, usually your screen).</li>
+        <li><code class="highlight">STDERR</code> is where error messages usually go (Standard ERRor).</li>
+    </ul>
+    <pre><code class="language-ruby">
+puts "What is your name?" # This prints to STDOUT
+user_name = STDIN.gets.chomp # This reads from STDIN
+
+puts "Hello, #{user_name}! It's nice to meet you."
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li><code class="highlight">puts</code> is a shorthand way to write to <code class="highlight">STDOUT</code>.</li>
+        <li><code class="highlight">STDIN.gets</code> waits for you to type something and press Enter. It reads the whole line.</li>
+        <li><code class="highlight">.chomp</code> is used again to remove the invisible Enter keypress from the end of what you typed.</li>
+    </ul>
+
+    <h3>Exploring Directories with `Dir`: Finding Your Way Around</h3>
+    <p>The <code class="highlight">Dir</code> class helps you look inside folders (directories) on your computer.</p>
+    <pre><code class="language-ruby">
+# Create a temporary directory for our example
+Dir.mkdir("my_treasure_chest") unless Dir.exist?("my_treasure_chest")
+File.write("my_treasure_chest/gold.txt", "Lots of gold!")
+File.write("my_treasure_chest/silver.txt", "Some silver...")
+Dir.mkdir("my_treasure_chest/secret_chamber") unless Dir.exist?("my_treasure_chest/secret_chamber")
+
+puts "\nFiles and folders in the current directory:"
+# List all files and directories in the current folder
+Dir.each do |entry|
+  puts "  - #{entry}"
+end
+
+puts "\nFiles and folders inside 'my_treasure_chest':"
+# List entries inside a specific directory
+Dir.foreach("my_treasure_chest") do |entry|
+  next if entry == "." || entry == ".." # Skip special directory entries
+  puts "  - #{entry}"
+end
+
+# Check if a directory exists
+puts "\nDoes 'my_treasure_chest' exist?: #{Dir.exist?('my_treasure_chest')}"
+
+# Delete the temporary directory and its contents (use with extreme caution!)
+# Dir.delete("my_treasure_chest/secret_chamber") # Delete empty sub-directory first
+# File.delete("my_treasure_chest/gold.txt")
+# File.delete("my_treasure_chest/silver.txt")
+# Dir.delete("my_treasure_chest")
+# puts "\nCleaned up 'my_treasure_chest'."
+    </code></pre>
+    <p><strong>Step-by-step commentary:</strong></p>
+    <ul>
+        <li><code class="highlight">Dir.mkdir("name")</code> creates a new directory. <code class="highlight">unless Dir.exist?("name")</code> ensures we only create it if it doesn't already exist.</li>
+        <li><code class="highlight">Dir.each do |entry| ... end</code> iterates through all files and subdirectories in the <strong class="highlight">current</strong> directory.</li>
+        <li><code class="highlight">Dir.foreach("directory_name") do |entry| ... end</code> does the same but for a <strong class="highlight">specific</strong> directory.</li>
+        <li><code class="highlight">next if entry == "." || entry == ".."</code> is important: <code class="highlight">.</code> means the current directory itself, and <code class="highlight">..</code> means the parent directory. We usually skip these when listing contents.</li>
+        <li><code class="highlight">Dir.exist?("name")</code> checks if a directory exists.</li>
+        <li>To delete a directory with <code class="highlight">Dir.delete</code>, it must be <strong class="highlight">empty</strong> first! You often need to delete its contents (files and subdirectories) before you can delete the main directory. This is why the delete operations are commented out for safety.</li>
+    </ul>
+
+    <p>Wow, you've learned so much! Ruby is a fantastic language, and you've just unlocked some of its core secrets. Keep practicing, keep experimenting, and you'll be building amazing things in no time!</p>
+    <p>Happy coding!</p>
+
+</body>
+</html>

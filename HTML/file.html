@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruby Mini‑Textbook: From Beginner to Confident Coder</title>
+  <style>
+    /* Simple, self-contained styles for readability */
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --muted: #475569;
+      --accent: #7c3aed;
+      --accent-2: #0ea5e9;
+      --code-bg: #0b1020;
+      --code-text: #e5e7eb;
+      --panel: #f8fafc;
+      --border: #e2e8f0;
+    }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    header { padding: 24px 16px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); color: white; }
+    header h1 { margin: 0 0 8px; font-size: 28px; }
+    header p { margin: 0; opacity: 0.95; }
+    main { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; }
+    section { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 18px 0; }
+    h2 { margin-top: 0; color: var(--accent); font-size: 22px; }
+    h3 { color: var(--accent-2); font-size: 18px; margin-bottom: 6px; }
+    p { line-height: 1.6; }
+    ul { margin-top: 8px; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+    pre { background: var(--code-bg); color: var(--code-text); padding: 14px; border-radius: 8px; overflow: auto; border: 1px solid #111827; }
+    .step { border-left: 3px solid var(--accent-2); padding-left: 10px; margin: 10px 0; color: var(--muted); }
+    .note { background: #fff7ed; border: 1px solid #fed7aa; color: #78350f; padding: 10px; border-radius: 8px; }
+    .warning { background: #fef2f2; border: 1px solid #fecaca; color: #7f1d1d; padding: 10px; border-radius: 8px; }
+    footer { text-align: center; color: var(--muted); padding: 24px 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ruby Mini‑Textbook: Learn by Reading, Understand by Doing</h1>
+    <p>A friendly guide with simple words, clear steps, and runnable examples.</p>
+  </header>
+  <main>
+    <section aria-labelledby="intro">
+      <h2 id="intro">How to Use This Mini‑Textbook</h2>
+      <p>
+        Read the child‑friendly explanation, glance at the code, then follow the step‑by‑step notes.
+        You can copy each code block into a <code>.rb</code> file and run it with <code>ruby your_file.rb</code>.
+        As you go, say out loud what the code does—this helps your brain remember it.
+      </p>
+    </section>
+
+    <section aria-labelledby="classes-objects-methods">
+      <h2 id="classes-objects-methods">1) Classes, Objects, and Methods</h2>
+      <h3>Child‑friendly idea</h3>
+      <p>
+        A <strong>class</strong> is a blueprint (like instructions to build a toy). An <strong>object</strong> is the toy you actually build from those instructions.
+        A <strong>method</strong> is something the toy can do when you ask it.
+      </p>
+      <h3>Code example</h3>
+      <pre><code class="language-ruby">class Robot
+  # This runs when we make a new Robot
+  def initialize(name)
+    @name = name   # an instance variable: each robot has its own name
+    @battery = 100 # start fully charged
+  end
+
+  # A method: what a Robot can do
+  def greet
+    "Hello, I am #{@name}!"
+  end
+
+  def work(minutes)
+    used = [minutes, @battery].min
+    @battery -= used
+    "Worked for #{used} minutes, battery: #{@battery}%"
+  end
+end
+
+# Build (instantiate) two Robot objects from the Robot class
+r1 = Robot.new("Rubi")
+r2 = Robot.new("Bolt")
+
+puts r1.greet          # =&gt; Hello, I am Rubi!
+puts r2.greet          # =&gt; Hello, I am Bolt!
+puts r1.work(30)       # =&gt; Worked for 30 minutes, battery: 70%
+puts r1.work(90)       # =&gt; Worked for 70 minutes, battery: 0%
+</code></pre>
+      <div class="step">
+        <p><strong>Step‑by‑step:</strong></p>
+        <ul>
+          <li><strong>class Robot</strong>: we create a blueprint called <code>Robot</code>.</li>
+          <li><strong>initialize</strong>: this runs automatically when we call <code>Robot.new</code>.</li>
+          <li><strong>@name, @battery</strong>: each object keeps its own values.</li>
+          <li><strong>greet/work</strong>: methods we can call on any robot: <code>r1.greet</code>, <code>r1.work(30)</code>.</li>
+          <li><strong>r1, r2</strong>: two separate robots built from the same instructions.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="blocks-procs-lambdas">
+      <h2 id="blocks-procs-lambdas">2) Blocks, Procs, and Lambdas</h2>
+      <h3>Child‑friendly idea</h3>
+      <p>
+        A <strong>block</strong> is like a tiny to‑do list you hand to a method: “do this for each item.”
+        A <strong>Proc</strong> or <strong>lambda</strong> lets you save that tiny to‑do list in a variable and run it later.
+      </p>
+      <h3>Code example</h3>
+      <pre><code class="language-ruby"># Blocks: passed with { ... } or do ... end
+[1, 2, 3].each { |n| puts n * 2 }
+
+# Procs: store a block for later
+doubler = Proc.new { |n| n * 2 }
+puts doubler.call(5) # =&gt; 10
+
+# Lambdas: like Procs but with stricter argument checking and different return behavior
+tripler = lambda { |n| n * 3 }
+puts tripler.call(5) # =&gt; 15
+
+def apply_to_each(numbers, fn)
+  numbers.map { |n| fn.call(n) }
+end
+
+puts apply_to_each([1, 2, 3], doubler).inspect # =&gt; [2, 4, 6]
+puts apply_to_each([1, 2, 3], tripler).inspect # =&gt; [3, 6, 9]
+
+# Key differences example
+def test_proc_vs_lambda
+  p = Proc.new { |a, b| "Proc got a=#{a.inspect}, b=#{b.inspect}" } # missing args become nil
+  l = lambda { |a, b| "Lambda got a=#{a}, b=#{b}" }                   # missing args raise error
+
+  puts p.call(1)           # b will be nil
+  # puts l.call(1)         # would raise ArgumentError if uncommented
+  puts l.call(1, 2)
+end
+
+test_proc_vs_lambda
+</code></pre>
+      <div class="step">
+        <p><strong>Step‑by‑step:</strong></p>
+        <ul>
+          <li><strong>Block</strong>: used with methods like <code>each</code> to act on items.</li>
+          <li><strong>Proc.new</strong> and <strong>lambda</strong>: save actions for later with <code>call</code>.</li>
+          <li><strong>Difference</strong>: lambdas care about argument count; Procs are lenient. <code>return</code> behaves differently inside methods too (lambdas return to the caller, Procs attempt to return from the enclosing method).</li>
+        </ul>
+      </div>
+      <div class="note">
+        <strong>Tip:</strong> Prefer lambdas when you want a function‑like object with predictable arguments.
+      </div>
+    </section>
+
+    <section aria-labelledby="namespaces-mixins">
+      <h2 id="namespaces-mixins">3) Namespaces and Mixins</h2>
+      <h3>Child‑friendly idea</h3>
+      <p>
+        A <strong>module</strong> is a named box. We put related things inside to keep names tidy and separate.
+        With <strong>mixins</strong>, a class can borrow code from a module (like learning a new skill!).
+      </p>
+      <h3>Code example</h3>
+      <pre><code class="language-ruby">module Payment
+  module Currency
+    def format_cents(cents)
+      "$#{(cents / 100.0).round(2)}"
+    end
+  end
+
+  module Loggable
+    def log(event)
+      puts "[Payment] #{event}"
+    end
+  end
+end
+
+class Order
+  include Payment::Currency   # adds instance methods to the class's objects
+  extend Payment::Loggable    # adds methods to the class itself
+
+  def initialize(total_cents)
+    @total_cents = total_cents
+  end
+
+  def total_label
+    format_cents(@total_cents)
+  end
+end
+
+Order.log("Creating order...")
+o = Order.new(2599)
+puts o.total_label # =&gt; $25.99
+</code></pre>
+      <div class="step">
+        <p><strong>Step‑by‑step:</strong></p>
+        <ul>
+          <li><strong>Modules as namespaces</strong>: <code>Payment::Currency</code> and <code>Payment::Loggable</code> avoid name clashes.</li>
+          <li><strong>include</strong>: adds module methods as <em>instance</em> methods to objects of the class.</li>
+          <li><strong>extend</strong>: adds module methods as <em>class</em> methods to the class itself.</li>
+          <li><strong>Real‑world feel</strong>: currency formatting and logging reused across classes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section aria-labelledby="reflection-metaprogramming">
+      <h2 id="reflection-metaprogramming">4) Reflection and Metaprogramming</h2>
+      <h3>Child‑friendly idea</h3>
+      <p>
+        <strong>Reflection</strong> is when Ruby lets your code look at itself: “what methods do I have?”
+        <strong>Metaprogramming</strong> is code that writes code (carefully!).
+      </p>
+      <h3>Code example</h3>
+      <pre><code class="language-ruby">class Profile
+  attr_accessor :name, :age
+
+  def initialize(name, age)
+    @name = name
+    @age = age
+  end
+end
+
+user = Profile.new("Sky", 12)
+
+# Reflection
+puts user.methods.grep(/name|age/).inspect  # =&gt; shows methods matching name or age
+puts user.send(:name)                       # =&gt; Sky (call method by name string/symbol)
+
+# Metaprogramming: generate similar methods
+class Profile
+  [:email, :phone].each do |field|
+    define_method("#{field}=") { |value| instance_variable_set("@#{field}", value) }
+    define_method(field) { instance_variable_get("@#{field}") }
+  end
+end
+
+user.email = "sky@example.com"
+puts user.email   # =&gt; sky@example.com
+</code></pre>
+      <div class="step">
+        <p><strong>Step‑by‑step:</strong></p>
+        <ul>
+          <li><strong>methods</strong>: shows what an object can do. We filtered with <code>grep</code>.</li>
+          <li><strong>send</strong>: call a method by its name (string or symbol).</li>
+          <li><strong>define_method</strong>: creates new methods while the program runs.</li>
+          <li><strong>instance_variable_set/get</strong>: set or get <code>@variables</code> dynamically.</li>
+        </ul>
+      </div>
+      <div class="warning"><strong>Warning:</strong> Metaprogramming is powerful but can make code hard to read and debug. Use it when it truly removes repetition and adds clarity.</div>
+    </section>
+
+    <section aria-labelledby="files-directories">
+      <h2 id="files-directories">5) Files and Directories</h2>
+      <h3>Child‑friendly idea</h3>
+      <p>
+        Your program can talk to your computer’s files: open them, read them, write them, and look inside folders.
+        Be careful to close files when done—or use blocks so Ruby does it for you.
+      </p>
+      <h3>Code example</h3>
+      <pre><code class="language-ruby"># Writing to a file (safe: Ruby will close it when the block ends)
+File.open("greeting.txt", "w") do |f|
+  f.puts "Hello file!"
+  f.puts "Second line"
+end
+
+# Reading the whole file
+content = File.read("greeting.txt")
+puts content
+
+# Reading line by line
+File.open("greeting.txt", "r") do |f|
+  f.each_line.with_index(1) do |line, i|
+    puts "Line #{i}: #{line.chomp}"
+  end
+end
+
+# Using STDIN/STDOUT
+STDOUT.puts "What is your name?"
+name = STDIN.gets&.chomp
+STDOUT.puts "Hi, #{name}!"
+
+# Exploring directories
+puts "Files in current folder:" 
+Dir.entries(".").each { |entry| puts " - #{entry}" }
+
+# Create a folder (if it does not exist), then write a file inside
+Dir.mkdir("data") unless Dir.exist?("data")
+File.write("data/info.txt", "Some data\n")
+
+# Safely append to a file
+File.open("data/info.txt", "a") { |f| f.puts "More data" }
+</code></pre>
+      <div class="step">
+        <p><strong>Step‑by‑step:</strong></p>
+        <ul>
+          <li><strong>File.open with a block</strong>: closes automatically when the block ends.</li>
+          <li><strong>File.read / File.write</strong>: quick helpers for whole files.</li>
+          <li><strong>STDIN/STDOUT</strong>: talk to the user in the terminal.</li>
+          <li><strong>Dir.entries</strong>: list what’s inside a folder.</li>
+          <li><strong>Dir.mkdir</strong>: make folders; <strong>"a"</strong> appends to files.</li>
+        </ul>
+      </div>
+      <div class="note"><strong>Tip:</strong> When handling user input or file paths, handle errors (e.g., with <code>begin ... rescue</code>) for robustness.</div>
+    </section>
+
+    <section aria-labelledby="next-steps">
+      <h2 id="next-steps">Your Next Steps</h2>
+      <ul>
+        <li><strong>Try it</strong>: Copy each code block into a file and run it.</li>
+        <li><strong>Change it</strong>: Rename classes/methods and see what breaks—then fix it.</li>
+        <li><strong>Explain it</strong>: Teach a friend what the code does. Teaching is learning.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    Built with care for beginners. You can code this too.
+  </footer>
+</body>
+</html>
+
+
